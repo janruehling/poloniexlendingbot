@@ -1,8 +1,8 @@
 # Need help configuring? View the Documentation: https://poloniexlendingbot.readthedocs.io/en/latest/configuration.html
 
 [API]
-apikey = YourAPIKey
-secret = YourSecret
+apikey = %(API_KEY)s
+secret = %(API_SECRET)s
 
 [BOT]
 #Sleeps between active iterations, time in seconds (1-3600)
@@ -36,16 +36,16 @@ gaptop = 200
 
 #Daily lend rate threshold after which we offer lends for x days as opposed to 2.
 #If set to 0 all offers will be placed for a 2 day period (0.003-5)
-xdaythreshold = 0.2
+xdaythreshold = 0.5
 xdays = 60
 
 #Auto-transfer of funds from exchange to lending balance.
 #Enter ALL to transfer all coins, enter ACTIVE to transfer any coins you have in your lending account when the bot starts, these can be mixed.
 #The currencies you enter below (comment it out to disable entirely, just leaving empty will result in an error) will be automatically transferred from your exchange balance to your lending balance whenever you deposit them.
-#transferableCurrencies = STR,BTC,BTS,CLAM,DOGE,DASH,LTC,MAID,XMR,XRP,ETH,FCT
+transferableCurrencies = %(AUTO_TRANSFER)s
 
 #Minimum loan size, the minimum size of offers to make, bigger values prevent the bot from loaning small available amounts but reduce loan fragmentation.
-minloansize = 0.01
+minloansize = 0.02
 
 #Keep Stuck Orders - Sometimes an order gets partially filled. When this happens it may leave the remainder of your coin under the set minloansize.
 #If this happens, KeepStuckOrders will keep your order where it is so maybe it can be filled. Otherwise it will be canceled and held until orders expire.
@@ -74,14 +74,14 @@ hideCoins = True
 
 # Local Market Analysis: Choose which coins to record the market of in order to analyse them and compute a recommended lending rate.
 # Enter ALL to analyse all coins, enter ACTIVE to analyse the markets of any coins you have in your lending account when the bot starts, these can be mixed.
-#analyseCurrencies = STR,BTC,BTS,CLAM,DOGE,DASH,LTC,MAID,XMR,XRP,ETH,FCT
+analyseCurrencies = ACTIVE
 # Choose how long to keep market data. (In days) (1-365)
-#analyseMaxAge = 30
+analyseMaxAge = 30
 # Choose how often to record a market's rate. (In seconds.) (10-3600)
-#analyseUpdateInterval = 60
+analyseUpdateInterval = 60
 # Choose how aggressive to lend at based on a market's performance. (As a percentile of the market's rate.) (1-99)
 # Recommendations: Conservative = 50, Moderate = 75, Aggressive = 90, Very Aggressive = 99
-#lendingStyle = 75
+lendingStyle = 75
 
 #Syntax: ["COIN:mindailyrate:maxactiveamount:maxtolend:maxpercenttolend:maxtolendrate",...]
 #If maxactive amount is 0: stop lending this coin. in the future you'll be able to limit amount to be lent.
@@ -134,11 +134,11 @@ hideCoins = True
 #maxtolendrate = 0
 
 [notifications]
-notify_new_loans = False
-notify_tx_coins = False
-notify_xday_threshold = False
-notify_summary_minutes = 0
-notify_caught_exception = False
+notify_new_loans = True
+notify_tx_coins = True
+notify_xday_threshold = True
+notify_summary_minutes = 120
+notify_caught_exception = True
 
 email = False
 email_login_address = me@gmail.com
@@ -152,9 +152,9 @@ slack = False
 slack_token = 1234567890abcdef
 slack_channels = #cryptocurrency,@someUser
 
-telegram = False
-telegram_bot_id = 1234567890abcdef
-telegram_chat_ids = @polopolo,@cryptocurrency
+telegram = %(USE_TELEGRAM)s
+telegram_bot_id = %(TELEGRAM_ID)s
+telegram_chat_ids = %(TELEGRAM_CHATS)s
 
 pushbullet = False
 pushbullet_token = 1234567890abcdef
