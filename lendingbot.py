@@ -31,7 +31,7 @@ dry_run = bool(args.dryrun)
 if args.config:
     config_location = args.config
 else:
-    config_location = 'default.cfg'
+    config_location = os.path.join(os.path.dirname(__file__), 'default.cfg')
 # End handling args.
 
 Config.init(config_location)

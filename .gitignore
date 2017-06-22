@@ -1,11 +1,11 @@
 *.pyc
 *.swp
-default.cfg
 www/botlog.json
 nohup.out
 error.log
 *.idea
 *.csv
 *.sqlite3
+.env
 
 docs/_build/

@@ -1,9 +1,10 @@
 # coding=utf-8
 from ConfigParser import SafeConfigParser
+import os
 import json
 from decimal import Decimal
 
-config = SafeConfigParser()
+config = SafeConfigParser(os.environ)
 Data = None
 FULL_LIST = ['STR', 'BTC', 'BTS', 'CLAM', 'DOGE', 'DASH', 'LTC', 'MAID', 'XMR', 'XRP', 'ETH', 'FCT']
 # This module is the middleman between the bot and a SafeConfigParser object, so that we can add extra functionality
@@ -175,7 +176,7 @@ def get_notification_config():
         for conf in ['telegram_bot_id', 'telegram_chat_ids']:
             notify_conf[conf] = get('notifications', conf)
         notify_conf['telegram_chat_ids'] = notify_conf['telegram_chat_ids'].split(',')
-    
+
     if notify_conf['pushbullet']:
         for conf in ['pushbullet_token', 'pushbullet_deviceid']:
             notify_conf[conf] = get('notifications', conf)
